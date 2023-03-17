@@ -14,11 +14,16 @@ const SaveList = () => {
   }
 
   const ClearItem = () => {
-    localStorage.removeItem('coffee', coffee);
-    localStorage.removeItem('sugar', sugar);
+    // localStorage.removeItem('coffee', coffee);
+    // localStorage.removeItem('sugar', sugar);
+    dispatchFunc({ type: 'Clear' })
   }
   const UploadItem = () => {
-    dispatchFunc({type: 'Upload'})
+    if (localStorage.getItem('coffee')) {
+      dispatchFunc({type: 'Upload'})
+    }
+    
+    return
   }
 
   return (
@@ -32,7 +37,7 @@ const SaveList = () => {
           <>
             <button onClick={SaveItem}>SAVE</button>
             <button onClick={ClearItem} >CLEAR</button>
-            <button onClick={UploadItem} >UPLOAD</button>
+            {localStorage.getItem('coffee') && <button onClick={UploadItem} >UPLOAD</button>}
           </>
         }
       </>
